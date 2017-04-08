@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h2>Autos</h2>
+
+<div class="jumbotron">
+    <h2>WillPam Autos</h2>
+    <p class="text-info">La Nueva experiencia a la hora de comprar autos!!</p>
+</div>
+
+<ul class="row thumbnails list-unstyled">
+    @*@foreach (var auto in Model)
+    {
+        <li class="span3 col-lg-3 col-sm-4 col-xs-6">
+            <div class="thumbnail">
+                <img src="@Url.Content(auto.Imagen)" alt="Imagen" />
+                <p class="text-center aler"> @auto.Marca - @auto.Modelo </p>
+                <h4 class="text-center"><i class="glyphicon glyphicon-ok"></i> $ @auto.Precio </h4>
+                <a href="@Url.Action("ConfirmarReserva", "Reserva", new { id = @auto.IDAuto })" class="btn btn-block btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Reservar</a>
+            </div>
+        </li>
+    }*@
+</ul>
