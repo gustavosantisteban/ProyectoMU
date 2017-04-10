@@ -14,6 +14,7 @@ namespace SeguridadWebv2.Models
         {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            //Admnistrador
             const string nombre = "William Gustavo";
             const string apellidopaterno = "Santisteban";
             const string apellidomaterno = "Farronan";
@@ -44,7 +45,7 @@ namespace SeguridadWebv2.Models
             groupManager.CreateGroup(newGroup);
             groupManager.SetUserGroups(user.Id, new string[] { newGroup.Id });
             groupManager.SetGroupRoles(newGroup.Id, new string[] { role.Name });
-
+            //Fin Admnistrador
 
             var provincias = new List<Provincia> {
                 new Provincia {
@@ -275,16 +276,8 @@ namespace SeguridadWebv2.Models
                     Descripcion = "Prestamo 1",
                     EntidadPrestamo = entidad[0],
                     Estado = true,
-                    Requisitos = requisitos,
-                    EscalaCuotas = new List<EscalaCuota>
-                    {
-                        new EscalaCuota
-                        {
-                            Importe = 100,
-                            CantidadCuotas = 2,
-                            Estado = true,
-                        }
-                    }
+                    Requisitos = null,
+                    EscalaCuotas = null,
                 },
                 new Prestamo
                 {
@@ -292,15 +285,7 @@ namespace SeguridadWebv2.Models
                     EntidadPrestamo = entidad[1],
                     Estado = true,
                     Requisitos = requisitos,
-                    EscalaCuotas = new List<EscalaCuota>
-                    {
-                        new EscalaCuota
-                        {
-                            Importe = 300,
-                            CantidadCuotas = 5,
-                            Estado = true,
-                        }
-                    }
+                    EscalaCuotas = null
                 },
             };
             prestamo.ForEach(c => db.Prestamos.Add(c));
@@ -364,62 +349,15 @@ namespace SeguridadWebv2.Models
             };
             PermisosUsuario.ForEach(c => db.Roles.Add(c));
 
-            var PermisosTurnos = new List<ApplicationRole> {
-                new ApplicationRole {
-                    Name = "Agregar_Turno"
-                },
-                new ApplicationRole {
-                    Name = "Editar_Turno"
-                },
-                new ApplicationRole {
-                    Name = "Detalle_Turno"
-                },
-                new ApplicationRole {
-                    Name = "Eliminar_Turno"
-                },
-                new ApplicationRole {
-                    Name = "AllTurnos"
-                }
-            };
-            PermisosTurnos.ForEach(c => db.Roles.Add(c));
-
-            var PermisosHorarios = new List<ApplicationRole> {
-                new ApplicationRole {
-                    Name = "Agregar_Horario"
-                },
-                new ApplicationRole {
-                    Name = "Editar_Horario"
-                },
-                new ApplicationRole {
-                    Name = "Detalle_Horario"
-                },
-                new ApplicationRole {
-                    Name = "Eliminar_Horario"
-                },
-                new ApplicationRole {
-                    Name = "AllHorarios"
-                }
-            };
-            PermisosHorarios.ForEach(c => db.Roles.Add(c));
-
-            var PermisosProfesionales = new List<ApplicationRole> {
-                new ApplicationRole {
-                    Name = "Agregar_Profesional"
-                },
-                new ApplicationRole {
-                    Name = "Editar_Profesional"
-                },
-                new ApplicationRole {
-                    Name = "Detalle_Profesional"
-                },
-                new ApplicationRole {
-                    Name = "Eliminar_Profesional"
-                },
-                new ApplicationRole {
-                    Name = "AllProfesionales"
-                }
-            };
-            PermisosProfesionales.ForEach(c => db.Roles.Add(c));
+            //var PermisosTurnos = new List<ApplicationRole> {
+            //    new ApplicationRole {
+            //        Name = "Vendedor"
+            //    },
+            //    new ApplicationRole {
+            //        Name = "Organizador"
+            //    }
+            //};
+            //PermisosTurnos.ForEach(c => db.Roles.Add(c));
 
             var grupos = new List<ApplicationGroup> {
                 new ApplicationGroup {
@@ -433,13 +371,126 @@ namespace SeguridadWebv2.Models
                 new ApplicationGroup {
                     Name = "Gestionar Acciones",
                     Description = "Gestionar Acciones"
-                },
-                new ApplicationGroup {
-                    Name = "Gestionar Autos",
-                    Description = "Gestionar Autos"
-                },
+                }
              };
             grupos.ForEach(c => db.ApplicationGroups.Add(c));
+
+            //Organizador
+            const string nombreorg = "Will Organizador";
+            const string apellidopaternoorg = "Santisteban";
+            const string apellidomaternoorg = "Crack";
+            const bool estadoorg = true;
+            const string nameorg = "rootsantisteban@gmail.com";
+            const string passwordorg = "Mcga@123456";
+            const string roleNameorg = "Organizador";
+
+            //Create Role Admin if it does not exist
+            var roleorg = roleManager.FindByName(roleNameorg);
+            if (roleorg == null)
+            {
+                roleorg = new ApplicationRole(roleNameorg);
+                var roleresult2 = roleManager.Create(roleorg);
+            }
+
+            var organizador = userManager.FindByName(nameorg);
+            if (organizador == null)
+            {
+                organizador = new Organizador
+                {
+                    UserName = nameorg,
+                    Email = nameorg,
+                    Nombre = nombreorg,
+                    ApellidoMaterno = apellidomaternoorg,
+                    ApellidoPaterno = apellidopaternoorg,
+                    Estado = estadoorg,
+                    EmailConfirmed = true,
+                    TipoDocumento = tipodocumento[0],
+                    Sexo = sexo[0],
+                    Localidad = localidades[1],
+                    EstadoCivil = estadocivil[0],
+                    TelefonoCelular = "3413544172",
+                    TelefonoFijo = "3413544172",
+                    PhoneNumber = "3413544172",
+                    NumeroDocumento = "94566808",
+                    Calle = "Presidente Roca",
+                    Altura = "976",
+                    CBU = "22225321",
+                    CUIT_CUIL = "20945668084",
+                    LugarDeTrabajo = "Twice Talent SRL",
+                    FechaDeNacimiento = DateTime.Parse("03-03-2016"),
+                    Imagen = "~/Content/img/doctor.png",
+                    Observaciones = ""
+                };
+
+                var result1 = userManager.Create(organizador, passwordorg);
+                result1 = userManager.SetLockoutEnabled(organizador.Id, false);
+            }
+            
+            var newGrouporg = new ApplicationGroup("Organizadores", "Acceso Roles Organizador");
+
+            groupManager.CreateGroup(newGrouporg);
+            groupManager.SetUserGroups(organizador.Id, new string[] { newGrouporg.Id });
+            groupManager.SetGroupRoles(newGrouporg.Id, new string[] { roleorg.Name });
+            //Fin Organizador
+
+            //Vendedor
+            const string nombrevend = "Gusti Vendedor";
+            const string apellidopaternovend = "Santis";
+            const string apellidomaternovend = "Vendedor";
+            const bool estadovend = true;
+            const string namevend = "williamcitoarg@gmail.com";
+            const string passwordvend = "Mcga@123456";
+            const string roleNamevend = "Vendedor";
+
+            //Create Role Admin if it does not exist
+            var rolevend = roleManager.FindByName(roleNamevend);
+            if (rolevend == null)
+            {
+                rolevend = new ApplicationRole(roleNamevend);
+                var roleresult3 = roleManager.Create(rolevend);
+            }
+
+            var vendedor = userManager.FindByName(namevend);
+            if (vendedor == null)
+            {
+                vendedor = new Vendedor
+                {
+                    UserName = namevend,
+                    Email = namevend,
+                    Nombre = nombrevend,
+                    ApellidoMaterno = apellidomaternovend,
+                    ApellidoPaterno = apellidopaternovend,
+                    Estado = estadovend,
+                    EmailConfirmed = true,
+                    TipoDocumento = tipodocumento[0],
+                    Sexo = sexo[0],
+                    Localidad = localidades[1],
+                    EstadoCivil = estadocivil[0],
+                    TelefonoCelular = "3413588888",
+                    TelefonoFijo = "3413588888",
+                    PhoneNumber = "3413588888",
+                    NumeroDocumento = "94566809",
+                    Calle = "Presidente Roca",
+                    Altura = "200",
+                    CBU = "222253222",
+                    CUIT_CUIL = "20945668094",
+                    LugarDeTrabajo = "Accenture SRL",
+                    FechaDeNacimiento = DateTime.Parse("03-03-2009"),
+                    Imagen = "~/Content/img/doctor.png",
+                    Observaciones = "",
+                    IdOrganizador = organizador.Id
+                };
+
+                var result2 = userManager.Create(vendedor, passwordvend);
+                result2 = userManager.SetLockoutEnabled(vendedor.Id, false);
+            }
+
+            var newGroupvend = new ApplicationGroup("Vendedores", "Acceso Roles Vendedor");
+
+            groupManager.CreateGroup(newGroupvend);
+            groupManager.SetUserGroups(vendedor.Id, new string[] { newGroupvend.Id });
+            groupManager.SetGroupRoles(newGroupvend.Id, new string[] { rolevend.Name });
+            //Fin Vendedor
             db.SaveChanges();
         }
     }

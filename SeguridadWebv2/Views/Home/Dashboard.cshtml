@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Dashboard";
 }
 
@@ -17,16 +16,32 @@
                 <div class="shortcuts">
                     @if (User.IsInRole("Admin") || User.IsInRole("AllUsuarios"))
                     {
-                        <a href='@Url.Action("Index", "UsuariosAdmin")' class="shortcut"><i class="fa fa-user"></i><span class="shortcut-label">Usuarios</span></a>}
+                        <a href='@Url.Action("Index", "UsuariosAdmin")' class="shortcut"><i class="fa fa-user"></i><span class="shortcut-label">Usuarios</span></a>
+                    }
                     @if (User.IsInRole("Admin") || User.IsInRole("AllGrupos"))
                     {
-                        <a href='@Url.Action("Index", "GruposAdmin")' class="shortcut"><i class="fa fa-group"></i><span class="shortcut-label">Grupos</span></a>}
+                        <a href='@Url.Action("Index", "GruposAdmin")' class="shortcut"><i class="fa fa-group"></i><span class="shortcut-label">Grupos</span></a>
+                    }
                     @if (User.IsInRole("Admin") || User.IsInRole("AllPermisos"))
                     {
-                        <a href='@Url.Action("Index", "AccionesAdmin")' class="shortcut"><i class="fa fa-check"></i><span class="shortcut-label">Permisos</span></a>}
-                    @if (User.IsInRole("Admin") || User.IsInRole("AllAutos"))
+                        <a href='@Url.Action("Index", "AccionesAdmin")' class="shortcut"><i class="fa fa-check"></i><span class="shortcut-label">Permisos</span></a>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Vendedor"))
                     {
-                        <a href='@Url.Action("Index", "Autos")' class="shortcut"> <i class="fa fa-taxi"></i><span class="shortcut-label">Viajes</span></a>}
+                        <a href='@Url.Action("Index", "Asociados")' class="shortcut"> <i class="fa fa-user-plus"></i><span class="shortcut-label">Asociados</span></a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href='@Url.Action("Index", "Organizadores")' class="shortcut"> <i class="fa fa-sitemap"></i><span class="shortcut-label">Organizadores</span></a>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Organizador"))
+                    {
+                        <a href='@Url.Action("Index", "Vendedores")' class="shortcut"> <i class="fa fa-users"></i><span class="shortcut-label">Vendedores</span></a>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Vendedor"))
+                    {
+                        <a href='@Url.Action("Index", "Solicitudes")' class="shortcut"> <i class="fa fa-money"></i><span class="shortcut-label">Solicitud de Prestamos</span></a>
+                    }
                 </div>
                 <!-- /shortcuts -->
             </div>
