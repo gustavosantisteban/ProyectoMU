@@ -26,12 +26,16 @@ namespace SeguridadWebv2.Models
             this.Id = Guid.NewGuid().ToString();
             // Add any custom User properties/code here
         }
-
+        [Required]
+        [StringLength(100)]
         public string Nombre { get; set; }
         [Required]
+        [StringLength(50)]
         public string ApellidoMaterno { get; set; }
         [Required]
+        [StringLength(50)]
         public string ApellidoPaterno { get; set; }
+        [Required]
         public bool Estado { get; set; }
 
         public async Task<ClaimsIdentity>

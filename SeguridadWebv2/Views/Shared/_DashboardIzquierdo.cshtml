@@ -28,33 +28,51 @@
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-suitcase" ></i>
-                <span>Autos</span>
+                <span>Vendedores</span>
             </a>
             <ul class="sub">
-                @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("AllAutos"))
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <li>@Html.ActionLink("Autos", "Index", "Autos")</li>
+                    <li>@Html.ActionLink("Listar Vendedores", "Index", "Vendedor")</li>
                 }
-                @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Reportes"))
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <li>@Html.ActionLink("Autos", "Reportes", "Autos")</li>
+                    <li>@Html.ActionLink("Reportes", "Reportes", "Vendedor")</li>
                 }
             </ul>
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class=" fa fa-bar-chart-o"></i>
-                <span>Reportes</span>
+                <span>Organizadores</span>
             </a>
             <ul class="sub">
-                @if (Request.IsAuthenticated && User.IsInRole("Reportes"))
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <li>@Html.ActionLink("Pasajes", "Reportes", "Pasajes")</li>
-                    <li>@Html.ActionLink("Hoteles", "Reportes", "Hoteles")</li>
+                    <li>@Html.ActionLink("Listar Organizadores", "Index", "Organizador")</li>
+                }
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Reportes", "Reportes", "Organizador")</li>
                 }
             </ul>
         </li>
-
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class=" fa fa-bar-chart-o"></i>
+                <span>Asociados</span>
+            </a>
+            <ul class="sub">
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Listar Asociados", "Index", "Asociados")</li>
+                }
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Reportes", "Reportes", "Asociados")</li>
+                }
+            </ul>
+        </li>
     </ul>
     <!-- sidebar menu end-->
 </div>

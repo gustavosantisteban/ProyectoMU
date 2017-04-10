@@ -144,6 +144,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AsociadoController.cs" />
+    <Compile Include="Controllers\OrganizadorController.cs" />
+    <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdministradorViewModel.cs" />
     <Compile Include="Models\Application\Asociado.cs" />
@@ -168,6 +171,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InicializarDatos.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\RegistrarAsocViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegistrarOrgViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegistrarVendViewModel.cs" />
     <Compile Include="Startup.cs" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -317,6 +323,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Asociado\" />
+    <Folder Include="Views\Organizador\" />
+    <Folder Include="Views\Vendedor\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
