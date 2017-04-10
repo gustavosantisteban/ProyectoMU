@@ -1,0 +1,303 @@
+﻿@model SeguridadWebv2.Models.ViewModels.RegistrarAsocViewModel
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<h2>Agregar</h2>
+@using (Html.BeginForm("Agregar", "Asociado", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Formulario Agregar Usuario.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-error" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ApellidoMaterno, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.ApellidoMaterno, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ApellidoPaterno, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.ApellidoPaterno, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdTipoDocumento, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+          @Html.DropDownListFor(x => x.IdTipoDocumento, new SelectList(ViewBag.TipoDocumento, "IdTipoDocumento", "Descripcion"))
+          <span class="input-group-addon">
+            <span class="fa fa-user">
+                </span>
+          </span>
+         </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NumeroDocumento, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.NumeroDocumento, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CUIT_CUIL, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.CUIT_CUIL, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdProfesion, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.DropDownListFor(x => x.IdProfesion, new SelectList(ViewBag.Profesiones, "IdProfesion", "Descripcion"))
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdCategoriaAsociado, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.DropDownListFor(x => x.IdCategoriaAsociado, new SelectList(ViewBag.Categorias, "IdCategoriaAsociado", "DescripcionCategoria"))
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdEstadoCivil, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.DropDownListFor(x => x.IdEstadoCivil, new SelectList(ViewBag.EstadoCivil, "IdEstadoCivil", "Descripcion"))
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdSexo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.DropDownListFor(x => x.IdSexo, new SelectList(ViewBag.Sexo, "IdSexo", "Descripcion"))
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdLocalidad, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.DropDownListFor(x => x.IdLocalidad, new SelectList(ViewBag.Localidades, "IdLocalidad", "Description"))
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdEstadoCivil, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.DropDownListFor(x => x.IdEstadoCivil, new SelectList(ViewBag.EstadoCivil, "IdEstadoCivil", "Descripcion"))
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Calle, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Calle, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Altura, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Altura, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Block, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Block, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Piso, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Piso, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Departamento, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Departamento, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TelefonoCelular, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.TelefonoCelular, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TelefonoFijo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.TelefonoFijo, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TelefonoLaboral, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.TelefonoLaboral, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TelefonoResidencia, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.TelefonoResidencia, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-envelope-square">
+                </span>
+            </span>
+        </div>
+    </div>
+ 
+    <div class="form-group">
+        @Html.LabelFor(m => m.LugarDeTrabajo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.LugarDeTrabajo, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-envelope-square">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CBU, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.CBU, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-envelope-square">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CBU_2, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.CBU_2, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-envelope-square">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CBU_3, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.CBU_3, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-envelope-square">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Observaciones, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextAreaFor(m => m.Observaciones, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-envelope-square">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Estado, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.CheckBoxFor(x => x.Estado)
+        </div>
+        @Html.ValidationMessageFor(x => x.Estado, null, new { @class = "help-block text-center" })
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" class="btn btn-success" value="Agregar" />
+        </div>
+    </div>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
+

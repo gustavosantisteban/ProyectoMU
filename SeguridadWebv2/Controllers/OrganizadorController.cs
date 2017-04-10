@@ -6,6 +6,7 @@ using SeguridadWebv2.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -60,7 +61,7 @@ namespace SeguridadWebv2.Controllers
 
         //[AllowAnonymous]
         [Authorize(Roles = "Admin")]
-        public ActionResult Registrarse()
+        public ActionResult Agregar()
         {
             RegistrarOrgViewModel registrarse = new RegistrarOrgViewModel();
             ViewBag.TipoDocumento = db.TipoDocumento.ToList();
@@ -76,7 +77,7 @@ namespace SeguridadWebv2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Registrarse(RegistrarOrgViewModel model)
+        public async Task<ActionResult> Agregar(RegistrarOrgViewModel model)
         {
             model.Estado = true;
             if (ModelState.IsValid)
@@ -130,6 +131,107 @@ namespace SeguridadWebv2.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Editar(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Display a list of available Groups:
+
+            var model = new EditarOrgViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Nombre = user.Nombre,
+                ApellidoMaterno = user.ApellidoMaterno,
+                Estado = user.Estado
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Editar(EditarOrgViewModel editUser)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(editUser.Id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Update the User:
+                user.UserName = editUser.Email;
+                user.Email = editUser.Email;
+                user.Nombre = editUser.Nombre;
+                user.ApellidoMaterno = editUser.ApellidoMaterno;
+                user.ApellidoPaterno = editUser.ApellidoPaterno;
+                user.Estado = editUser.Estado;
+                await this.UserManager.UpdateAsync(user);
+
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Something failed.");
+            return View();
+        }
+
+
+        [Authorize(Roles = "Admin, Eliminar_Usuario")]
+        public async Task<ActionResult> Eliminar(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+
+        [HttpPost, ActionName("Eliminar")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ConfirmarEliminar(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var user = await UserManager.FindByIdAsync(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Then Delete the User:
+                var result = await UserManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         private void AddErrors(IdentityResult result)

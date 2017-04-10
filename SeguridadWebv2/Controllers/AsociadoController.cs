@@ -6,6 +6,7 @@ using SeguridadWebv2.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -58,15 +59,17 @@ namespace SeguridadWebv2.Controllers
         }
 
         //[AllowAnonymous]
-        [Authorize(Roles = "Vendedor")]
-        public ActionResult Registrarse()
+        [Authorize(Roles = "Admin, Vendedor")]
+        public ActionResult Agregar()
         {
-            RegistrarVendViewModel registrarse = new RegistrarVendViewModel();
+            RegistrarAsocViewModel registrarse = new RegistrarAsocViewModel();
             ViewBag.TipoDocumento = db.TipoDocumento.ToList();
             ViewBag.Organizadores = db.Organizadores.Where(x => x.Estado == true).ToList();
             ViewBag.Localidades = db.Localidades.Where(x => x.Estado == true).ToList();
             ViewBag.Sexo = db.Sexo.Where(x => x.Estado == true).ToList();
             ViewBag.EstadoCivil = db.EstadoCivil.Where(x => x.Estado == true).ToList();
+            ViewBag.Profesiones = db.Profesiones.Where(x => x.Estado == true).ToList();
+            ViewBag.Categorias = db.CategoriaAsociado.Where(x => x.Estado == true).ToList();
             return View(registrarse);
         }
 
@@ -75,7 +78,7 @@ namespace SeguridadWebv2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Registrarse(RegistrarAsocViewModel model)
+        public async Task<ActionResult> Agregar(RegistrarAsocViewModel model)
         {
             model.Estado = true;
             if (ModelState.IsValid)
@@ -100,6 +103,8 @@ namespace SeguridadWebv2.Controllers
                     CUIT_CUIL = model.CUIT_CUIL,
                     Departamento = model.Departamento,
                     IdEstadoCivil = model.IdEstadoCivil,
+                    IdCategoria = model.IdCategoriaAsociado,
+                    IdProfesion = model.IdProfesion,
                     IdLocalidad = model.IdLocalidad,
                     IdSexo = model.IdSexo,
                     IdTipoDocumento = model.IdTipoDocumento,
@@ -110,11 +115,110 @@ namespace SeguridadWebv2.Controllers
                     Imagen = pathimage
                 };
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-       
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Editar(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Display a list of available Groups:
+
+            var model = new EditarAsocViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Nombre = user.Nombre,
+                ApellidoMaterno = user.ApellidoMaterno,
+                Estado = user.Estado
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Editar(EditarAsocViewModel editUser)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(editUser.Id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Update the User:
+                user.UserName = editUser.Email;
+                user.Email = editUser.Email;
+                user.Nombre = editUser.Nombre;
+                user.ApellidoMaterno = editUser.ApellidoMaterno;
+                user.ApellidoPaterno = editUser.ApellidoPaterno;
+                user.Estado = editUser.Estado;
+                await this.UserManager.UpdateAsync(user);
+
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Something failed.");
+            return View();
+        }
+
+
+        [Authorize(Roles = "Admin, Eliminar_Usuario")]
+        public async Task<ActionResult> Eliminar(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+
+        [HttpPost, ActionName("Eliminar")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ConfirmarEliminar(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var user = await UserManager.FindByIdAsync(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Then Delete the User:
+                var result = await UserManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }
