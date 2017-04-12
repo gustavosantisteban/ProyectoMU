@@ -168,6 +168,7 @@
     <Compile Include="Models\GroupStoreBase.cs" />
     <Compile Include="Models\GrupoManager.cs" />
     <Compile Include="Models\GrupoStore.cs" />
+    <Compile Include="Models\Helpers\Seguridad.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InicializarDatos.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -314,6 +315,9 @@
     <Content Include="Views\Shared\_DashboardIzquierdo.cshtml" />
     <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Asociado\Agregar.cshtml" />
+    <Content Include="Views\Organizador\Agregar.cshtml" />
+    <Content Include="Views\Vendedor\Agregar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -323,9 +327,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Asociado\" />
-    <Folder Include="Views\Organizador\" />
-    <Folder Include="Views\Vendedor\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,10 +11,16 @@ namespace SeguridadWebv2.Models.Application
     public class Vendedor : ApplicationUser
     {
         [Required]
-        [StringLength(8)]
+        [StringLength(50)]
+        public string ApellidoMaterno { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string ApellidoPaterno { get; set; }
+        [Required]
+        [StringLength(15)]
         public string NumeroDocumento { get; set; }
         [Required]
-        [StringLength(11)]
+        [StringLength(15)]
         public string CUIT_CUIL { get; set; }
         [Required]
         [StringLength(100)]
@@ -27,10 +33,10 @@ namespace SeguridadWebv2.Models.Application
 
         public DateTime FechaDeNacimiento { get; set; }
         [Required]
-        [StringLength(10)]
+        [StringLength(15)]
         public string TelefonoFijo { get; set; }
         [Required]
-        [StringLength(11)]
+        [StringLength(15)]
         public string TelefonoCelular { get; set; }
 
         public string TelefonoLaboral { get; set; }
@@ -48,10 +54,15 @@ namespace SeguridadWebv2.Models.Application
         public string Imagen { get; set; }
 
         //Foreign
+        [Required]
         public string IdEstadoCivil { get; set; }
+        [Required]
         public string IdLocalidad { get; set; }
+        [Required]
         public string IdSexo { get; set; }
+        [Required]
         public string IdOrganizador { get; set; }
+        [Required]
         public string IdTipoDocumento { get; set; }
         //Fin Foreign
 

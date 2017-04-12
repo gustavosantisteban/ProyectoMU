@@ -11,6 +11,12 @@ namespace SeguridadWebv2.Models.Application
     public class Organizador : ApplicationUser
     {
         [Required]
+        [StringLength(50)]
+        public string ApellidoMaterno { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string ApellidoPaterno { get; set; }
+        [Required]
         [StringLength(8)]
         public string NumeroDocumento { get; set; }
         [Required]
@@ -47,9 +53,13 @@ namespace SeguridadWebv2.Models.Application
         public string Observaciones { get; set; }
         public string Imagen { get; set; }
         //Foreing
+        [Required]
         public string IdEstadoCivil { get; set; }
+        [Required]
         public string IdLocalidad { get; set; }
+        [Required]
         public string IdSexo { get; set; }
+        [Required]
         public string IdTipoDocumento { get; set; }
         //Fin Foreing
 

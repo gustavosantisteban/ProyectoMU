@@ -64,9 +64,9 @@ namespace SeguridadWebv2.Controllers
         public ActionResult Agregar()
         {
             RegistrarVendViewModel registrarse = new RegistrarVendViewModel();
-            string clave = Seguridad.ClaveAleatoria();
-            registrarse.Password = clave;
-            registrarse.ConfirmPassword = clave;
+            //string clave = Seguridad.ClaveAleatoria();
+            //registrarse.Password = clave;
+            //registrarse.ConfirmPassword = clave;
             ListRelations();
             return View(registrarse);
         }
@@ -100,6 +100,7 @@ namespace SeguridadWebv2.Controllers
                     ApellidoPaterno = model.ApellidoPaterno,
                     Estado = model.Estado,
                     PhoneNumber = model.TelefonoCelular,
+                    TelefonoCelular = model.TelefonoCelular,
                     TelefonoFijo = model.TelefonoFijo,
                     TelefonoLaboral = model.TelefonoLaboral,
                     TelefonoResidencia = model.TelefonoResidencia,
@@ -123,12 +124,12 @@ namespace SeguridadWebv2.Controllers
                     Imagen = pathimage
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                
+                GrupoManager groupManager = new GrupoManager();
+                var group = db.ApplicationGroups.Where(x => x.Name == "Vendedores").FirstOrDefault();
+                groupManager.SetUserGroups(user.Id, group.Id);
                 if (result.Succeeded)
                 {
-                    GrupoManager groupManager = new GrupoManager();
-                    var group = db.ApplicationGroups.Where(x => x.Name == "Vendedores").FirstOrDefault();
-                    groupManager.SetUserGroups(user.Id, group.Id);
+                   
                     //await this.groupManager.SetUserGroups(user.Id, "Vendedores");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmarEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
@@ -165,7 +166,6 @@ namespace SeguridadWebv2.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 Nombre = user.Nombre,
-                ApellidoMaterno = user.ApellidoMaterno,
                 Estado = user.Estado
             };
             
@@ -189,8 +189,6 @@ namespace SeguridadWebv2.Controllers
                 user.UserName = editUser.Email;
                 user.Email = editUser.Email;
                 user.Nombre = editUser.Nombre;
-                user.ApellidoMaterno = editUser.ApellidoMaterno;
-                user.ApellidoPaterno = editUser.ApellidoPaterno;
                 user.Estado = editUser.Estado;
                 await this.UserManager.UpdateAsync(user);
                 

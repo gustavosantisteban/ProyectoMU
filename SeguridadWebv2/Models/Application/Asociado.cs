@@ -67,11 +67,17 @@ namespace SeguridadWebv2.Models.Application
         public string Email { get; set; }
         public string Imagen { get; set; }
         //Foreing
+        [Required]
         public string IdTipoDocumento { get; set; }
+        [Required]
         public string IdEstadoCivil { get; set; }
+        [Required]
         public string IdLocalidad { get; set; }
+        [Required]
         public string IdSexo { get; set; }
+        [Required]
         public string IdProfesion { get; set; }
+        [Required]
         public string IdCategoria { get; set; }
         //Fin Foreing
 

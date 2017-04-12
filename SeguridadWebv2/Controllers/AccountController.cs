@@ -151,7 +151,7 @@ namespace SeguridadWebv2.Controllers
             model.Estado = true;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, ApellidoMaterno = model.Apellido, ApellidoPaterno = model.Apellido, Estado = model.Estado };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Estado = model.Estado };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

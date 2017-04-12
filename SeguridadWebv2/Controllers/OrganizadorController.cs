@@ -91,6 +91,7 @@ namespace SeguridadWebv2.Controllers
                         ApellidoPaterno = model.ApellidoPaterno,
                         Estado = model.Estado,
                         PhoneNumber = model.TelefonoCelular,
+                        TelefonoCelular = model.TelefonoCelular,
                         TelefonoFijo = model.TelefonoFijo,
                         TelefonoLaboral = model.TelefonoLaboral,
                         TelefonoResidencia = model.TelefonoResidencia,
@@ -114,7 +115,7 @@ namespace SeguridadWebv2.Controllers
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 GrupoManager groupManager = new GrupoManager();
-                var group = db.ApplicationGroups.Where(x => x.Name == "Organizador").FirstOrDefault();
+                var group = db.ApplicationGroups.Where(x => x.Name == "Organizadores").FirstOrDefault();
                 groupManager.SetUserGroups(user.Id, group.Id);
                 if (result.Succeeded)
                 {
@@ -153,7 +154,6 @@ namespace SeguridadWebv2.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 Nombre = user.Nombre,
-                ApellidoMaterno = user.ApellidoMaterno,
                 Estado = user.Estado
             };
 
@@ -177,8 +177,6 @@ namespace SeguridadWebv2.Controllers
                 user.UserName = editUser.Email;
                 user.Email = editUser.Email;
                 user.Nombre = editUser.Nombre;
-                user.ApellidoMaterno = editUser.ApellidoMaterno;
-                user.ApellidoPaterno = editUser.ApellidoPaterno;
                 user.Estado = editUser.Estado;
                 await this.UserManager.UpdateAsync(user);
 

@@ -16,8 +16,6 @@ namespace SeguridadWebv2.Models
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
             //Admnistrador
             const string nombre = "William Gustavo";
-            const string apellidopaterno = "Santisteban";
-            const string apellidomaterno = "Farronan";
             const bool estado = true;
             const string name = "administrador@amdr.com.ar";
             const string password = "Mcga@123456";
@@ -34,7 +32,7 @@ namespace SeguridadWebv2.Models
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = name, Email = name, Nombre = nombre, ApellidoMaterno = apellidomaterno, ApellidoPaterno = apellidopaterno, Estado = estado, EmailConfirmed = true };
+                user = new ApplicationUser { UserName = name, Email = name, Nombre = nombre, Estado = estado, EmailConfirmed = true };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }

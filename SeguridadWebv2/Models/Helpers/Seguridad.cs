@@ -18,11 +18,11 @@ namespace SeguridadWebv2.Models.Helpers
                 int rm = random.Next(0, 2);
                 if (rm == 0)
                 {
-                    ClaveAleat += "M" + random.Next(0, 5) + "@" + random.Next(0, 5);
+                    ClaveAleat += random.Next(0, 10) + "@";
                 }
                 else
                 {
-                    ClaveAleat += ValueAfanumeric[random.Next(0, 59)];
+                    ClaveAleat += ValueAfanumeric[random.Next(0, 59)] + "@";
                 }
             }
             return ClaveAleat;

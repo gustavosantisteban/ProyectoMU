@@ -113,7 +113,6 @@ namespace SeguridadWebv2.Controllers
                     UserName = userViewModel.Email,
                     Email = userViewModel.Email,
                     Nombre = userViewModel.Nombre,
-                    ApellidoMaterno = userViewModel.Apellido,
                     Estado = userViewModel.Estado
                 };
                 var adminresult = await UserManager
@@ -167,7 +166,6 @@ namespace SeguridadWebv2.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 Nombre = user.Nombre,
-                Apellido = user.ApellidoMaterno,
                 Estado = user.Estado
             };
 
@@ -203,7 +201,6 @@ namespace SeguridadWebv2.Controllers
                 user.UserName = editUser.Email;
                 user.Email = editUser.Email;
                 user.Nombre = editUser.Nombre;
-                user.ApellidoMaterno = editUser.Apellido;
                 user.Estado = editUser.Estado;
                 await this.UserManager.UpdateAsync(user);
 

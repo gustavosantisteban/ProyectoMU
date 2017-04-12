@@ -71,19 +71,9 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.IdProfesion, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.FechaDeNacimiento, new { @class = "col-md-2 control-label" })
         <div class="col-md-6 input-group">
-            @Html.DropDownListFor(x => x.IdProfesion, new SelectList(ViewBag.Profesiones, "IdProfesion", "Descripcion"))
-            <span class="input-group-addon">
-                <span class="fa fa-user">
-                </span>
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.IdCategoriaAsociado, new { @class = "col-md-2 control-label" })
-        <div class="col-md-6 input-group">
-            @Html.DropDownListFor(x => x.IdCategoriaAsociado, new SelectList(ViewBag.Categorias, "IdCategoriaAsociado", "DescripcionCategoria"))
+            @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @class = "form-control" })
             <span class="input-group-addon">
                 <span class="fa fa-user">
                 </span>
@@ -121,16 +111,6 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.IdEstadoCivil, new { @class = "col-md-2 control-label" })
-        <div class="col-md-6 input-group">
-            @Html.DropDownListFor(x => x.IdEstadoCivil, new SelectList(ViewBag.EstadoCivil, "IdEstadoCivil", "Descripcion"))
-            <span class="input-group-addon">
-                <span class="fa fa-user">
-                </span>
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
         @Html.LabelFor(m => m.Calle, new { @class = "col-md-2 control-label" })
         <div class="col-md-6 input-group">
             @Html.TextBoxFor(m => m.Calle, new { @class = "form-control" })
@@ -154,16 +134,6 @@
         @Html.LabelFor(m => m.Block, new { @class = "col-md-2 control-label" })
         <div class="col-md-6 input-group">
             @Html.TextBoxFor(m => m.Block, new { @class = "form-control" })
-            <span class="input-group-addon">
-                <span class="fa fa-user">
-                </span>
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Piso, new { @class = "col-md-2 control-label" })
-        <div class="col-md-6 input-group">
-            @Html.TextBoxFor(m => m.Piso, new { @class = "form-control" })
             <span class="input-group-addon">
                 <span class="fa fa-user">
                 </span>
@@ -226,6 +196,26 @@
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
             <span class="input-group-addon">
                 <span class="fa fa-envelope-square">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
                 </span>
             </span>
         </div>
