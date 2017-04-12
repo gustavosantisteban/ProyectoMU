@@ -286,5 +286,18 @@
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+            $.notify({
+                title: '@ViewBag.Resultado ',
+                text: '@ViewBag.Resultado ',
+            }, {
+                style: 'metro',
+                className: style,
+                autoHide: false,
+                clickToHide: false,
+                globalPosition: 'top right'
+            });
+    </script>
 }
 

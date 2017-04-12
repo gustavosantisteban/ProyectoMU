@@ -121,16 +121,6 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.IdEstadoCivil, new { @class = "col-md-2 control-label" })
-        <div class="col-md-6 input-group">
-            @Html.DropDownListFor(x => x.IdEstadoCivil, new SelectList(ViewBag.EstadoCivil, "IdEstadoCivil", "Descripcion"))
-            <span class="input-group-addon">
-                <span class="fa fa-user">
-                </span>
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
         @Html.LabelFor(m => m.Calle, new { @class = "col-md-2 control-label" })
         <div class="col-md-6 input-group">
             @Html.TextBoxFor(m => m.Calle, new { @class = "form-control" })
@@ -204,6 +194,16 @@
         @Html.LabelFor(m => m.TelefonoLaboral, new { @class = "col-md-2 control-label" })
         <div class="col-md-6 input-group">
             @Html.TextBoxFor(m => m.TelefonoLaboral, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <span class="fa fa-user">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FechaDeNacimiento, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6 input-group">
+            @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @class = "form-control" })
             <span class="input-group-addon">
                 <span class="fa fa-user">
                 </span>
@@ -291,13 +291,72 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-6">
-            <input type="submit" class="btn btn-success" value="Agregar" />
+            <input type="submit" id="sendasociado" class="btn btn-success" value="Agregar" />
         </div>
     </div>
+}
+
+<style type="text/css">
+    .box {
+        display: inline-block;
+        border: thin solid blue;
+        padding: 10px;
+        margin: 50px;
+        width: 100px;
     }
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+</style>
 
+<div class="box 2">single</div>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
+    <script type="text/javascript">
+       $.notify({
+	        // options
+	        icon: 'glyphicon glyphicon-warning-sign',
+	        title: "@ViewBag.Resultado",
+            message: "@ViewBag.Resultado",
+	        url: 'https://github.com/mouse0270/bootstrap-notify',
+	        target: '_blank'
+      },{
+	    // settings
+	    element: 'body',
+	    position: null,
+	    type: "info",
+	    allow_dismiss: true,
+	    newest_on_top: false,
+	    showProgressbar: false,
+	    placement: {
+		    from: "top",
+		    align: "right"
+	    },
+	    offset: 20,
+	    spacing: 10,
+	    z_index: 1031,
+	    delay: 5000,
+	    timer: 1000,
+	    url_target: '_blank',
+	    mouse_over: null,
+	    animate: {
+		    enter: 'animated fadeInDown',
+		    exit: 'animated fadeOutUp'
+	 },
+	    onShow: null,
+	    onShown: null,
+	    onClose: null,
+	    onClosed: null,
+	    icon_type: 'class',
+	    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+		    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+		    '<span data-notify="icon"></span> ' +
+		    '<span data-notify="title">{1}</span> ' +
+		    '<span data-notify="message">{2}</span>' +
+		    '<div class="progress" data-notify="progressbar">' +
+			    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+		    '</div>' +
+		    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+	    '</div>'
+});
+    </script>
+}

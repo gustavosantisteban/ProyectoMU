@@ -295,7 +295,57 @@
         </div>
     </div>
 }
+
+<style type="text/css">
+    .box {
+        display: inline-block;
+        border: thin solid blue;
+        padding: 10px;
+        margin: 50px;
+        width: 100px;
+    }
+</style>
+
+<div class="box 2">single</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
 
+    <script type="text/javascript">
+        @*$.notify({
+                title: '@ViewBag.Resultado',
+                text: '@ViewBag.Resultado ',
+            }, {
+                style: 'metro',
+                className: style,
+                autoHide: false,
+                clickToHide: false,
+                globalPosition: 'top right'
+            });*@
+
+
+        $.notify.defaults({ arrowShow: false, autoHide: false })
+        $.notify.addStyle('single-text', {
+            html: "<div data-notify-text></div>"
+        });
+        $.notify.addStyle('multi-text', {
+            html: "<div>\n" +
+              "<p data-notify-text=\"title\"></p>\n" +
+              "<p data-notify-text=\"p1\"></p>\n" +
+              "<p data-notify-text=\"p2\"></p>\n" +
+              "</div>"
+        });
+        $(function () {
+            $(".1").notify({
+                title: '@ViewBag.Resultado',
+                p1: '@ViewBag.Resultado',
+                p2: '@ViewBag.Resultado'
+            }, {
+                style: 'multi-text'
+            })
+            $(".2").notify('@ViewBag.Resultado', {
+                style: 'single-text'
+            })
+        });
+    </script>
+}

@@ -181,7 +181,7 @@ namespace SeguridadWebv2.Models
             : this()
         {
             this.Name = name;
-        }
+      }
 
         public ApplicationGroup(string name, string description)
             : this(name)

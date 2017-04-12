@@ -94,6 +94,7 @@ namespace SeguridadWebv2.Controllers
                     TelefonoFijo = model.TelefonoFijo,
                     TelefonoLaboral = model.TelefonoLaboral,
                     TelefonoResidencia = model.TelefonoResidencia,
+                    Email = model.Email,
                     Altura = model.Altura,
                     Block = model.Block,
                     Calle = model.Calle,
@@ -114,9 +115,26 @@ namespace SeguridadWebv2.Controllers
                     Observaciones = model.Observaciones,
                     Imagen = pathimage
                 };
+                db.Asociados.Add(user);
+                db.SaveChanges();
+
+                ViewBag.Success = true;
+                ViewBag.Resultado = "Se registro correctamente un asociado";
             }
+            ListRelations();
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View();
+        }
+
+        public void ListRelations()
+        {
+            ViewBag.TipoDocumento = db.TipoDocumento.ToList();
+            ViewBag.Organizadores = db.Organizadores.Where(x => x.Estado == true).ToList();
+            ViewBag.Localidades = db.Localidades.Where(x => x.Estado == true).ToList();
+            ViewBag.Sexo = db.Sexo.Where(x => x.Estado == true).ToList();
+            ViewBag.EstadoCivil = db.EstadoCivil.Where(x => x.Estado == true).ToList();
+            ViewBag.Profesiones = db.Profesiones.Where(x => x.Estado == true).ToList();
+            ViewBag.Categorias = db.CategoriaAsociado.Where(x => x.Estado == true).ToList();
         }
 
         [Authorize(Roles = "Admin")]

@@ -129,7 +129,7 @@ namespace SeguridadWebv2.Controllers
                 groupManager.SetUserGroups(user.Id, group.Id);
                 if (result.Succeeded)
                 {
-                   
+                    ViewBag.Resultado = "Se registro correctamente un Vendedor";
                     //await this.groupManager.SetUserGroups(user.Id, "Vendedores");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmarEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);

@@ -119,6 +119,7 @@ namespace SeguridadWebv2.Controllers
                 groupManager.SetUserGroups(user.Id, group.Id);
                 if (result.Succeeded)
                 {
+                    ViewBag.Resultado = "Se registro correctamente un Organizador";
                     //await this.groupManager.SetUserGroups(user.Id, "Profesionales");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmarEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
@@ -129,9 +130,18 @@ namespace SeguridadWebv2.Controllers
                 }
                 AddErrors(result);
             }
-
+            ListRelations();
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public void ListRelations()
+        {
+            ViewBag.TipoDocumento = db.TipoDocumento.ToList();
+            ViewBag.Organizadores = db.Organizadores.Where(x => x.Estado == true).ToList();
+            ViewBag.Localidades = db.Localidades.Where(x => x.Estado == true).ToList();
+            ViewBag.Sexo = db.Sexo.Where(x => x.Estado == true).ToList();
+            ViewBag.EstadoCivil = db.EstadoCivil.Where(x => x.Estado == true).ToList();
         }
 
         [Authorize(Roles = "Admin")]

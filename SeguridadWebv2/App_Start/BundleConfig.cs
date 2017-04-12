@@ -22,6 +22,8 @@ namespace SeguridadWebv2
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/jquery.js",
                       "~/Scripts/bootstrap.js",
+                       "~/Scripts/notifyjs/bootstrap-notify.js",
+                       "~/Scripts/notifyjs/bootstrap-notify.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/adminPanelJs").Include(
@@ -36,10 +38,10 @@ namespace SeguridadWebv2
                       "~/Content/SeguridadStyle.css"));
 
             bundles.Add(new StyleBundle("~/Content/adminPanel").Include(
-                 "~/Content/font-awesome/css/font-awesome.css",
-                 "~/Content/bootstrap.css",
+                  "~/Content/font-awesome/css/font-awesome.css",
+                  "~/Content/bootstrap.css",
                   "~/Content/SeguridadDashboard.css",
-                   "~/Content/SeguridadResponsiveDash.css"
+                  "~/Content/SeguridadResponsiveDash.css"
                 ));
         }
     }
