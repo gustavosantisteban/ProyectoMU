@@ -61,5 +61,7 @@ namespace SeguridadWebv2.Models.Application
         public virtual Localidad Localidad { get; set; }
         [ForeignKey("IdSexo")]
         public virtual Sexo Sexo { get; set; }
+
+        public virtual ICollection<Vendedor> Vendedores { get; set; }
     }
 }
