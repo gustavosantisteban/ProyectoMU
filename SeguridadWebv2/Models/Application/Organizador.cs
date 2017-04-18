@@ -17,10 +17,10 @@ namespace SeguridadWebv2.Models.Application
         [StringLength(50)]
         public string ApellidoPaterno { get; set; }
         [Required]
-        [StringLength(8)]
+        [StringLength(10)]
         public string NumeroDocumento { get; set; }
         [Required]
-        [StringLength(11)]
+        [StringLength(15)]
         public string CUIT_CUIL { get; set; }
         [Required]
         [StringLength(100)]
@@ -33,10 +33,10 @@ namespace SeguridadWebv2.Models.Application
 
         public DateTime FechaDeNacimiento { get; set; }
         [Required]
-        [StringLength(10)]
+        [StringLength(20)]
         public string TelefonoFijo { get; set; }
         [Required]
-        [StringLength(11)]
+        [StringLength(20)]
         public string TelefonoCelular { get; set; }
 
         public string TelefonoLaboral { get; set; }
@@ -53,13 +53,13 @@ namespace SeguridadWebv2.Models.Application
         public string Observaciones { get; set; }
         public string Imagen { get; set; }
         //Foreing
-        [Required]
+        
         public string IdEstadoCivil { get; set; }
-        [Required]
+        
         public string IdLocalidad { get; set; }
-        [Required]
+       
         public string IdSexo { get; set; }
-        [Required]
+        
         public string IdTipoDocumento { get; set; }
         //Fin Foreing
 
@@ -72,6 +72,6 @@ namespace SeguridadWebv2.Models.Application
         [ForeignKey("IdSexo")]
         public virtual Sexo Sexo { get; set; }
 
-        public virtual ICollection<Vendedor> Vendedores { get; set; }
+        public virtual List<Vendedor> Vendedores { get; set; }
     }
 }

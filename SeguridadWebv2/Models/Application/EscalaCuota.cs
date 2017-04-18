@@ -23,6 +23,6 @@ namespace SeguridadWebv2.Models.Application
         public string IdPrestamo { get; set; }
 
         [ForeignKey("IdPrestamo")]
-        public Prestamo Prestamo { get; set; }
+        public virtual Prestamo Prestamo { get; set; }
     }
 }

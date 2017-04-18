@@ -63,13 +63,7 @@ namespace SeguridadWebv2.Controllers
         public ActionResult Agregar()
         {
             RegistrarAsocViewModel registrarse = new RegistrarAsocViewModel();
-            ViewBag.TipoDocumento = db.TipoDocumento.ToList();
-            ViewBag.Organizadores = db.Organizadores.Where(x => x.Estado == true).ToList();
-            ViewBag.Localidades = db.Localidades.Where(x => x.Estado == true).ToList();
-            ViewBag.Sexo = db.Sexo.Where(x => x.Estado == true).ToList();
-            ViewBag.EstadoCivil = db.EstadoCivil.Where(x => x.Estado == true).ToList();
-            ViewBag.Profesiones = db.Profesiones.Where(x => x.Estado == true).ToList();
-            ViewBag.Categorias = db.CategoriaAsociado.Where(x => x.Estado == true).ToList();
+            ListRelations();
             return View(registrarse);
         }
 
@@ -144,22 +138,45 @@ namespace SeguridadWebv2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = await UserManager.FindByIdAsync(id);
-            if (user == null)
+            var asociado = db.Asociados.Where(x => x.IdAsociado == id).FirstOrDefault();
+            if (asociado == null)
             {
                 return HttpNotFound();
             }
-
-            // Display a list of available Groups:
-
             var model = new EditarAsocViewModel()
             {
-                Id = user.Id,
-                Email = user.Email,
-                Nombre = user.Nombre,
-                Estado = user.Estado
+                Id = asociado.IdAsociado,
+                Email = asociado.Email,
+                Nombre = asociado.Nombre,
+                Estado = asociado.Estado,
+                Altura = asociado.Altura,
+                ApellidoMaterno = asociado.ApellidoMaterno,
+                ApellidoPaterno = asociado.ApellidoPaterno,
+                Block = asociado.Block,
+                Calle = asociado.Calle, 
+                CBU = asociado.CBU,
+                CBU_2 = asociado.CBU_2,
+                CBU_3 = asociado.CBU_3,
+                CUIT_CUIL = asociado.CUIT_CUIL,
+                Departamento = asociado.Departamento,
+                FechaDeNacimiento = asociado.FechaDeNacimiento,
+                Imagen = asociado.Imagen,
+                LugarDeTrabajo = asociado.LugarDeTrabajo,
+                NumeroDocumento = asociado.NumeroDocumento,
+                TelefonoCelular = asociado.TelefonoCelular,
+                TelefonoFijo = asociado.TelefonoFijo,
+                TelefonoLaboral = asociado.TelefonoLaboral,
+                TelefonoResidencia = asociado.TelefonoResidencia,
+                Observaciones = asociado.Observaciones,
+                Piso = asociado.Altura,
+                IdCategoriaAsociado = asociado.IdCategoria,
+                IdEstadoCivil = asociado.IdEstadoCivil,
+                IdLocalidad = asociado.IdLocalidad,
+                IdProfesion = asociado.IdProfesion,
+                IdSexo = asociado.IdSexo,
+                IdTipoDocumento = asociado.IdTipoDocumento
             };
-
+            ListRelations();
             return View(model);
         }
 

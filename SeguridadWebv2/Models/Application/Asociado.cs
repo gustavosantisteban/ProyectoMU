@@ -94,5 +94,7 @@ namespace SeguridadWebv2.Models.Application
         public virtual Profesion Profesion { get; set; }
         [ForeignKey("IdCategoria")]
         public virtual CategoriaAsociado Categoria { get; set; }
+        
+        public virtual List<Prestamo> Prestamos { get; set; }
     }
 }

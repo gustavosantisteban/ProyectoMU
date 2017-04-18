@@ -21,6 +21,6 @@ namespace SeguridadWebv2.Models.Application
         public bool Estado { get; set; }
         public Decimal Comision { get; set; }
 
-        public virtual ICollection<Prestamo> Prestamos { get; set; }
+        public virtual List<TipoPrestamo> Prestamos { get; set; }
     }
 }

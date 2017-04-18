@@ -267,9 +267,9 @@ namespace SeguridadWebv2.Models
             };
             requisitos.ForEach(c => db.Requisitos.Add(c));
 
-            var prestamo = new List<Prestamo>
+            var prestamo = new List<TipoPrestamo>
             {
-                new Prestamo
+                new TipoPrestamo
                 {
                     Descripcion = "Prestamo 1",
                     EntidadPrestamo = entidad[0],
@@ -277,7 +277,7 @@ namespace SeguridadWebv2.Models
                     Requisitos = null,
                     EscalaCuotas = null,
                 },
-                new Prestamo
+                new TipoPrestamo
                 {
                     Descripcion = "Prestamo 2",
                     EntidadPrestamo = entidad[1],
@@ -286,7 +286,7 @@ namespace SeguridadWebv2.Models
                     EscalaCuotas = null
                 },
             };
-            prestamo.ForEach(c => db.Prestamos.Add(c));
+            prestamo.ForEach(c => db.TipoPrestamos.Add(c));
 
             var PermisosUsuario = new List<ApplicationRole> {
                 new ApplicationRole {
@@ -347,15 +347,15 @@ namespace SeguridadWebv2.Models
             };
             PermisosUsuario.ForEach(c => db.Roles.Add(c));
 
-            //var PermisosTurnos = new List<ApplicationRole> {
-            //    new ApplicationRole {
-            //        Name = "Vendedor"
-            //    },
-            //    new ApplicationRole {
-            //        Name = "Organizador"
-            //    }
-            //};
-            //PermisosTurnos.ForEach(c => db.Roles.Add(c));
+            var PermisosTurnos = new List<ApplicationRole> {
+                new ApplicationRole {
+                    Name = "Vendedor"
+                },
+                new ApplicationRole {
+                    Name = "Organizador"
+                }
+            };
+            PermisosTurnos.ForEach(c => db.Roles.Add(c));
 
             var grupos = new List<ApplicationGroup> {
                 new ApplicationGroup {
@@ -373,122 +373,124 @@ namespace SeguridadWebv2.Models
              };
             grupos.ForEach(c => db.ApplicationGroups.Add(c));
 
-            //Organizador
-            const string nombreorg = "Will Organizador";
-            const string apellidopaternoorg = "Santisteban";
-            const string apellidomaternoorg = "Crack";
-            const bool estadoorg = true;
-            const string nameorg = "rootsantisteban@gmail.com";
-            const string passwordorg = "Mcga@123456";
-            const string roleNameorg = "Organizador";
+            ////Organizador
+            //const string nombreorg = "Will Organizador";
+            //const string apellidopaternoorg = "Santisteban";
+            //const string apellidomaternoorg = "Crack";
+            //const bool estadoorg = true;
+            //const string nameorg = "rootsantisteban2@gmail.com";
+            //const string passwordorg = "Mcga@123456";
+            ////const string roleNameorg = "Organizador";
 
-            //Create Role Admin if it does not exist
-            var roleorg = roleManager.FindByName(roleNameorg);
-            if (roleorg == null)
-            {
-                roleorg = new ApplicationRole(roleNameorg);
-                var roleresult2 = roleManager.Create(roleorg);
-            }
+            ////Create Role Organizador if it does not exist
+            ////var roleorg = roleManager.FindByName(roleNameorg);
+            ////if (roleorg == null)
+            ////{
+            ////    roleorg = new ApplicationRole(roleNameorg);
+            ////    var roleresult2 = roleManager.Create(roleorg);
+            ////}
 
-            var organizador = userManager.FindByName(nameorg);
-            if (organizador == null)
-            {
-                organizador = new Organizador
-                {
-                    UserName = nameorg,
-                    Email = nameorg,
-                    Nombre = nombreorg,
-                    ApellidoMaterno = apellidomaternoorg,
-                    ApellidoPaterno = apellidopaternoorg,
-                    Estado = estadoorg,
-                    EmailConfirmed = true,
-                    TipoDocumento = tipodocumento[0],
-                    Sexo = sexo[0],
-                    Localidad = localidades[1],
-                    EstadoCivil = estadocivil[0],
-                    TelefonoCelular = "3413544172",
-                    TelefonoFijo = "3413544172",
-                    PhoneNumber = "3413544172",
-                    NumeroDocumento = "94566808",
-                    Calle = "Presidente Roca",
-                    Altura = "976",
-                    CBU = "22225321",
-                    CUIT_CUIL = "20945668084",
-                    LugarDeTrabajo = "Twice Talent SRL",
-                    FechaDeNacimiento = DateTime.Parse("03-03-2016"),
-                    Imagen = "~/Content/img/doctor.png",
-                    Observaciones = ""
-                };
+            //var organizador = userManager.FindByName(nameorg);
+            //if (organizador == null)
+            //{
+            //    organizador = new Organizador
+            //    {
+            //        UserName = nameorg,
+            //        Email = nameorg,
+            //        Nombre = nombreorg,
+            //        ApellidoMaterno = apellidomaternoorg,
+            //        ApellidoPaterno = apellidopaternoorg,
+            //        Estado = estadoorg,
+            //        EmailConfirmed = true,
+            //        TipoDocumento = tipodocumento[0],
+            //        Sexo = sexo[0],
+            //        Localidad = localidades[1],
+            //        EstadoCivil = estadocivil[0],
+            //        TelefonoCelular = "341354472",
+            //        TelefonoFijo = "341354417",
+            //        TelefonoLaboral = "000000",
+            //        TelefonoResidencia = "000000",
+            //        PhoneNumber = "3413544172",
+            //        NumeroDocumento = "94566808",
+            //        Calle = "Presidente Roca",
+            //        Altura = "976",
+            //        CBU = "22225321",
+            //        CUIT_CUIL = "20945668084",
+            //        LugarDeTrabajo = "Twice Talent SRL",
+            //        FechaDeNacimiento = DateTime.Parse("03-03-2016"),
+            //        Imagen = "~/Content/img/doctor.png",
+            //        Observaciones = ""
+            //    };
 
-                var result1 = userManager.Create(organizador, passwordorg);
-                result1 = userManager.SetLockoutEnabled(organizador.Id, false);
-            }
+            //    var result1 = userManager.Create(organizador, passwordorg);
+            //    result1 = userManager.SetLockoutEnabled(organizador.Id, false);
+            //}
             
-            var newGrouporg = new ApplicationGroup("Organizadores", "Acceso Roles Organizador");
+            //var newGrouporg = new ApplicationGroup("Organizadores", "Acceso Roles Organizador");
 
-            groupManager.CreateGroup(newGrouporg);
-            groupManager.SetUserGroups(organizador.Id, new string[] { newGrouporg.Id });
-            groupManager.SetGroupRoles(newGrouporg.Id, new string[] { roleorg.Name });
-            //Fin Organizador
+            //groupManager.CreateGroup(newGrouporg);
+            //groupManager.SetUserGroups(organizador.Id, new string[] { newGrouporg.Id });
+            //groupManager.SetGroupRoles(newGrouporg.Id, new string[] { PermisosTurnos[0].Name });
+            ////Fin Organizador
 
-            //Vendedor
-            const string nombrevend = "Gusti Vendedor";
-            const string apellidopaternovend = "Santis";
-            const string apellidomaternovend = "Vendedor";
-            const bool estadovend = true;
-            const string namevend = "williamcitoarg@gmail.com";
-            const string passwordvend = "Mcga@123456";
-            const string roleNamevend = "Vendedor";
+            ////Vendedor
+            //const string nombrevend = "Gusti Vendedor";
+            //const string apellidopaternovend = "Santis";
+            //const string apellidomaternovend = "Vendedor";
+            //const bool estadovend = true;
+            //const string namevend = "williamcitoarg@gmail.com";
+            //const string passwordvend = "Mcga@123456";
+            ////const string roleNamevend = "Vendedor";
 
-            //Create Role Admin if it does not exist
-            var rolevend = roleManager.FindByName(roleNamevend);
-            if (rolevend == null)
-            {
-                rolevend = new ApplicationRole(roleNamevend);
-                var roleresult3 = roleManager.Create(rolevend);
-            }
+            ////Create Role Admin if it does not exist
+            ////var rolevend = roleManager.FindByName(roleNamevend);
+            ////if (rolevend == null)
+            ////{
+            ////    rolevend = new ApplicationRole(roleNamevend);
+            ////    var roleresult3 = roleManager.Create(rolevend);
+            ////}
 
-            var vendedor = userManager.FindByName(namevend);
-            if (vendedor == null)
-            {
-                vendedor = new Vendedor
-                {
-                    UserName = namevend,
-                    Email = namevend,
-                    Nombre = nombrevend,
-                    ApellidoMaterno = apellidomaternovend,
-                    ApellidoPaterno = apellidopaternovend,
-                    Estado = estadovend,
-                    EmailConfirmed = true,
-                    TipoDocumento = tipodocumento[0],
-                    Sexo = sexo[0],
-                    Localidad = localidades[1],
-                    EstadoCivil = estadocivil[0],
-                    TelefonoCelular = "3413588888",
-                    TelefonoFijo = "3413588888",
-                    PhoneNumber = "3413588888",
-                    NumeroDocumento = "94566809",
-                    Calle = "Presidente Roca",
-                    Altura = "200",
-                    CBU = "222253222",
-                    CUIT_CUIL = "20945668094",
-                    LugarDeTrabajo = "Accenture SRL",
-                    FechaDeNacimiento = DateTime.Parse("03-03-2009"),
-                    Imagen = "~/Content/img/doctor.png",
-                    Observaciones = "",
-                    IdOrganizador = organizador.Id
-                };
+            //var vendedor = userManager.FindByName(namevend);
+            //if (vendedor == null)
+            //{
+            //    vendedor = new Vendedor
+            //    {
+            //        UserName = namevend,
+            //        Email = namevend,
+            //        Nombre = nombrevend,
+            //        ApellidoMaterno = apellidomaternovend,
+            //        ApellidoPaterno = apellidopaternovend,
+            //        Estado = estadovend,
+            //        EmailConfirmed = true,
+            //        TipoDocumento = tipodocumento[0],
+            //        Sexo = sexo[0],
+            //        Localidad = localidades[1],
+            //        EstadoCivil = estadocivil[0],
+            //        TelefonoCelular = "3413588888",
+            //        TelefonoFijo = "3413588888",
+            //        PhoneNumber = "3413588888",
+            //        NumeroDocumento = "94566809",
+            //        Calle = "Presidente Roca",
+            //        Altura = "200",
+            //        CBU = "222253222",
+            //        CUIT_CUIL = "20945668094",
+            //        LugarDeTrabajo = "Accenture SRL",
+            //        FechaDeNacimiento = DateTime.Parse("03-03-2009"),
+            //        Imagen = "~/Content/img/doctor.png",
+            //        Observaciones = "",
+            //        IdOrganizador = organizador.Id
+            //    };
 
-                var result2 = userManager.Create(vendedor, passwordvend);
-                result2 = userManager.SetLockoutEnabled(vendedor.Id, false);
-            }
+            //    var result2 = userManager.Create(vendedor, passwordvend);
+            //    result2 = userManager.SetLockoutEnabled(vendedor.Id, false);
+            //}
 
-            var newGroupvend = new ApplicationGroup("Vendedores", "Acceso Roles Vendedor");
+            //var newGroupvend = new ApplicationGroup("Vendedores", "Acceso Roles Vendedor");
 
-            groupManager.CreateGroup(newGroupvend);
-            groupManager.SetUserGroups(vendedor.Id, new string[] { newGroupvend.Id });
-            groupManager.SetGroupRoles(newGroupvend.Id, new string[] { rolevend.Name });
-            //Fin Vendedor
+            //groupManager.CreateGroup(newGroupvend);
+            //groupManager.SetUserGroups(vendedor.Id, new string[] { newGroupvend.Id });
+            //groupManager.SetGroupRoles(newGroupvend.Id, new string[] { PermisosTurnos[1].Name });
+            ////Fin Vendedor
             db.SaveChanges();
         }
     }

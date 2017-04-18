@@ -17,14 +17,23 @@ namespace SeguridadWebv2.Models.Application
 
         [Key]
         public string IdPrestamo { get; set; }
-        public string Descripcion { get; set; }
+        public DateTime FechaPrestamo { get; set; }
+        public DateTime FechaAcreditacion { get; set; }
         public bool Estado { get; set; }
+        public Decimal Importe { get; set; }
+        public int CantidadCuotas { get; set; }
 
-        public string IdEntidad { get; set; }
+        [Required]
+        public string IdAsociado { get; set; }
+        [Required]
+        public string IdVendedor { get; set; }
 
-        [ForeignKey("IdEntidad")]
-        public virtual Entidad EntidadPrestamo { get; set; }
-        public virtual List<Requisito> Requisitos { get; set; }
+        [ForeignKey("IdAsociado")]
+        public virtual Asociado Asociado { get; set; }
+        [ForeignKey("IdVendedor")]
+        public virtual Vendedor Vendedor { get; set; }
+
+        public virtual List<DetallePrestamo> DetallePrestamo { get; set; }
         public virtual List<EscalaCuota> EscalaCuotas { get; set; }
     }
 }

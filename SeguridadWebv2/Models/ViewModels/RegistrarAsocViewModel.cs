@@ -144,6 +144,7 @@ namespace SeguridadWebv2.Models.ViewModels
         public string Altura { get; set; }
         public string Block { get; set; }
         public string Departamento { get; set; }
+        public string Piso { get; set; }
 
         public DateTime FechaDeNacimiento { get; set; }
         [Required]
@@ -164,12 +165,22 @@ namespace SeguridadWebv2.Models.ViewModels
 
         //Foreing
         [Required]
+        [Display(Name = "Estado Civil")]
         public string IdEstadoCivil { get; set; }
         [Required]
+        [Display(Name = "Profesion")]
+        public string IdProfesion { get; set; }
+        [Required]
+        [Display(Name = "Categoría")]
+        public string IdCategoriaAsociado { get; set; }
+        [Required]
+        [Display(Name = "Localidad")]
         public string IdLocalidad { get; set; }
         [Required]
+        [Display(Name = "Sexo")]
         public string IdSexo { get; set; }
         [Required]
+        [Display(Name = "Tipo de Documento")]
         public string IdTipoDocumento { get; set; }
         //Fin Foreing
     }

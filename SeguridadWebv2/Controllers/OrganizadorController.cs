@@ -69,6 +69,7 @@ namespace SeguridadWebv2.Controllers
             ViewBag.Localidades = db.Localidades.Where(x => x.Estado == true).ToList();
             ViewBag.Sexo = db.Sexo.Where(x => x.Estado == true).ToList();
             ViewBag.EstadoCivil = db.EstadoCivil.Where(x => x.Estado == true).ToList();
+            registrarse.Estado = true;
             return View(registrarse);
         }
 
@@ -79,7 +80,6 @@ namespace SeguridadWebv2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Agregar(RegistrarOrgViewModel model)
         {
-            model.Estado = true;
             if (ModelState.IsValid)
             {
                 string pathimage = "~/Content/img/doctor.png";

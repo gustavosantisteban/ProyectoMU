@@ -82,23 +82,24 @@ namespace SeguridadWebv2.Models
 
         // Add the ApplicationGroups property:
         public virtual IDbSet<ApplicationGroup> ApplicationGroups { get; set; }
-        public DbSet<EstadoCivil> EstadoCivil { get; set; }
-        public DbSet<Provincia> Provincias { get; set; }
-        public DbSet<Localidad> Localidades { get; set; }
-        public DbSet<Profesion> Profesiones { get; set; }
-        public DbSet<TipoDocumento> TipoDocumento { get; set; }
-        public DbSet<Sexo> Sexo { get; set; }
-        public DbSet<CategoriaAsociado> CategoriaAsociado { get; set; }
-        public DbSet<Vendedor> Vendedores { get; set; }
-        public DbSet<Asociado> Asociados { get; set; }
-        public DbSet<Organizador> Organizadores { get; set; }
-        public DbSet<Entidad> Entidad { get; set; }
-        public DbSet<EscalaCuota> EscalaCuotas { get; set; }
-        public DbSet<Prestamo> Prestamos { get; set; }
-        public DbSet<Requisito> Requisitos { get; set; }
-        public DbSet<Solicitud> Solicitudes { get; set; }
-        public DbSet<TipoRequisito> TipoRequisito { get; set; }
-
+        public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
+        public virtual DbSet<Provincia> Provincias { get; set; }
+        public virtual DbSet<Localidad> Localidades { get; set; }
+        public virtual DbSet<Profesion> Profesiones { get; set; }
+        public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
+        public virtual DbSet<Sexo> Sexo { get; set; }
+        public virtual DbSet<CategoriaAsociado> CategoriaAsociado { get; set; }
+        public virtual DbSet<Vendedor> Vendedores { get; set; }
+        public virtual DbSet<Asociado> Asociados { get; set; }
+        public virtual DbSet<TipoRequisito> TipoRequisito { get; set; }
+        public virtual DbSet<Organizador> Organizadores { get; set; }
+        public virtual DbSet<Entidad> Entidad { get; set; }
+        public virtual DbSet<EscalaCuota> EscalaCuotas { get; set; }
+        public virtual DbSet<TipoPrestamo> TipoPrestamos { get; set; }
+        public virtual DbSet<Prestamo> Prestamos { get; set; }
+        public virtual DbSet<Requisito> Requisitos { get; set; }
+        public virtual DbSet<Solicitud> Solicitudes { get; set; }
+        public virtual DbSet<DetallePrestamo> DetallePrestamos { get; set; }
         // Override OnModelsCreating:
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

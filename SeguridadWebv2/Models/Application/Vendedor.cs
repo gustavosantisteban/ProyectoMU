@@ -54,15 +54,15 @@ namespace SeguridadWebv2.Models.Application
         public string Imagen { get; set; }
 
         //Foreign
-        [Required]
+        
         public string IdEstadoCivil { get; set; }
-        [Required]
+        
         public string IdLocalidad { get; set; }
-        [Required]
+        
         public string IdSexo { get; set; }
-        [Required]
+        
         public string IdOrganizador { get; set; }
-        [Required]
+       
         public string IdTipoDocumento { get; set; }
         //Fin Foreign
 
@@ -76,6 +76,8 @@ namespace SeguridadWebv2.Models.Application
         public virtual Sexo Sexo { get; set; }
         [ForeignKey("IdOrganizador")]
         public virtual Organizador Organizador { get; set; }
+
+        public virtual List<Prestamo> Prestamos { get; set; }
 
     }
 }
